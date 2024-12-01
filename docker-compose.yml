@@ -1,0 +1,14 @@
+services:
+  loe-parser:
+    platform: linux/amd64
+    container_name: loe-parser
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DOCKER_BUILDKIT: 1
+    volumes:
+      - type: bind
+        source: ./data
+        target: /app/data
+    entrypoint: ["/app/parse-image"]
