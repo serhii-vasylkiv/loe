@@ -9,7 +9,6 @@ services:
         DOCKER_BUILDKIT: 1
     volumes:
       - loe-data:/app
-  app-data:
     entrypoint: ["/app/parse-image"]
     environment:
       - TZ=Europe/Kyiv
