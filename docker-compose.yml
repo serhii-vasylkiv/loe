@@ -7,8 +7,8 @@ services:
       dockerfile: Dockerfile
       args:
         DOCKER_BUILDKIT: 1
-    volumes:
-      - type: bind
-        source: ./data
-        target: /app/data
+    # volumes:
+    #   - type: bind
+    #     source: ./data
+    #     target: /app/data
     entrypoint: ["/app/parse-image"]
