@@ -7,11 +7,9 @@ services:
       dockerfile: Dockerfile
       args:
         DOCKER_BUILDKIT: 1
-    # Uncomment below to use bind mount
-    # volumes:
-    #   - type: bind
-    #     source: ./data
-    #     target: /app/data
+    volumes:
+      - loe-data:/app
+  app-data:
     entrypoint: ["/app/parse-image"]
     environment:
       - TZ=Europe/Kyiv
@@ -21,3 +19,5 @@ services:
         condition: on-failure
         delay: 10m # Run every 10 minutes
         max_attempts: 0
+volumes:
+  loe-data:
