@@ -23,7 +23,6 @@ const (
 
 func main() {
 	opts := append(chromedp.DefaultExecAllocatorOptions[:],
-		chromedp.UserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36"),
 		chromedp.UserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"),
 	)
 	ctx, cancel := chromedp.NewExecAllocator(context.Background(), opts...)
@@ -55,6 +54,10 @@ func main() {
 
 	saveImages(imgSrcs)
 	saveDateToFile(imgSrcs)
+
+	// Simulate failure condition to be able to utilize Portainer's restart policy
+	fmt.Println("Work done!")
+	os.Exit(1) // Non-zero exit code indicates failure
 }
 
 func saveImages(imgSrcs []string) error {
@@ -83,6 +86,8 @@ func saveImages(imgSrcs []string) error {
 		if err != nil {
 			return fmt.Errorf("failed to write content to file: %v", err)
 		}
+
+		fmt.Printf("Downloaded %s\n", downloadDir+filepath+"."+extension)
 	}
 
 	return nil
@@ -101,6 +106,8 @@ func saveDateToFile(imgSrcs []string) error {
 	}
 	sort.Strings(imgSrcs)
 	file.WriteString(imgSrcs[len(imgSrcs)-1])
+
+	fmt.Printf("Written last time to %s [%s]\n", downloadDir+"date.txt", imgSrcs[len(imgSrcs)-1])
 
 	return nil
 }
