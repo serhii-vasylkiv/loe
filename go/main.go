@@ -27,7 +27,7 @@ func main() {
 	)
 	ctx, cancel := chromedp.NewExecAllocator(context.Background(), opts...)
 	defer cancel()
-	ctx, cancel = chromedp.NewContext(ctx)
+	ctx, cancel = chromedp.NewContext(ctx, chromedp.WithDebugf(log.Printf))
 	defer cancel()
 
 	var imgSrcs []string
@@ -56,8 +56,8 @@ func main() {
 	saveDateToFile(imgSrcs)
 
 	// Simulate failure condition to be able to utilize Portainer's restart policy
-	fmt.Println("Work done!")
-	os.Exit(1) // Non-zero exit code indicates failure
+	// fmt.Println("Work done!")
+	// os.Exit(1) // Non-zero exit code indicates failure
 }
 
 func saveImages(imgSrcs []string) error {
@@ -87,7 +87,8 @@ func saveImages(imgSrcs []string) error {
 			return fmt.Errorf("failed to write content to file: %v", err)
 		}
 
-		fmt.Printf("Downloaded %s\n", downloadDir+filepath+"."+extension)
+		// fmt.Printf("Downloaded %s\n", downloadDir+filepath+"."+extension)
+		fmt.Println("Downloaded ", downloadDir+filepath+"."+extension)
 	}
 
 	return nil
@@ -107,7 +108,8 @@ func saveDateToFile(imgSrcs []string) error {
 	sort.Strings(imgSrcs)
 	file.WriteString(imgSrcs[len(imgSrcs)-1])
 
-	fmt.Printf("Written last time to %s [%s]\n", downloadDir+"date.txt", imgSrcs[len(imgSrcs)-1])
+	// fmt.Printf("Written last time to %s [%s]\n", downloadDir+"date.txt", imgSrcs[len(imgSrcs)-1])
+	fmt.Println("Written last time to ", fmt.Sprintf("%s [%s]", downloadDir+"date.txt", imgSrcs[len(imgSrcs)-1]))
 
 	return nil
 }

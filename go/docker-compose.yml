@@ -1,5 +1,5 @@
 services:
- loe-parser:
+  loe-parser:
     platform: linux/amd64
     container_name: loe-parser
     build:
@@ -9,10 +9,14 @@ services:
         DOCKER_BUILDKIT: 1
     volumes:
       - loe-data:/app
-      - ./data:/app/data
+    entrypoint: ["/app/parse-image"]
     environment:
-      - NODE_ENV=production
       - TZ=Europe/Kyiv
-      # - DEBUG=puppeteer:*
+    # restart: on-failure
+    # deploy:
+    #   restart_policy:
+    #     condition: on-failure
+    #     delay: 10m # Run every 10 minutes
+    #     max_attempts: 0
 volumes:
   loe-data:

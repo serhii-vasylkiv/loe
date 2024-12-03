@@ -1,0 +1,26 @@
+{
+  "name": "loe",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/serhii-vasylkiv/loe.git"
+  },
+  "keywords": [
+    "loe"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/serhii-vasylkiv/loe/issues"
+  },
+  "homepage": "https://github.com/serhii-vasylkiv/loe#readme",
+  "description": "",
+  "dependencies": {
+    "puppeteer": "^23.9.0"
+  }
+}
