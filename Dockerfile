@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:18
 
 # Install necessary dependencies
 RUN apt-get update && apt-get install -y \
@@ -41,8 +41,8 @@ COPY package*.json ./
 RUN npm install
 
 # Copy the rest of the application code
-COPY . .
+COPY src ./
 
 # Run the application
-# CMD ["node", "app.js"]
+# CMD ["node", "src/app.js"]
 CMD ["tail", "-f", "/dev/null"]
